@@ -74,10 +74,18 @@ end
 time([[try_loadstring definition]], false)
 time([[Defining packer_plugins]], true)
 _G.packer_plugins = {
-  ["cmp-nvim-lsp"] = {
+  ["coq.artifacts"] = {
     loaded = true,
-    path = "/Users/yh_huang/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
-    url = "https://github.com/hrsh7th/cmp-nvim-lsp"
+    path = "/Users/yh_huang/.local/share/nvim/site/pack/packer/start/coq.artifacts",
+    url = "https://github.com/ms-jpq/coq.artifacts"
+  },
+  coq_nvim = {
+    config = { "vim.cmd[[COQnow]]" },
+    loaded = false,
+    needs_bufread = true,
+    only_cond = false,
+    path = "/Users/yh_huang/.local/share/nvim/site/pack/packer/opt/coq_nvim",
+    url = "https://github.com/ms-jpq/coq_nvim"
   },
   ["lualine.nvim"] = {
     loaded = true,
@@ -98,11 +106,6 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/yh_huang/.local/share/nvim/site/pack/packer/start/monokai.nvim",
     url = "https://github.com/tanvirtin/monokai.nvim"
-  },
-  ["nvim-cmp"] = {
-    loaded = true,
-    path = "/Users/yh_huang/.local/share/nvim/site/pack/packer/start/nvim-cmp",
-    url = "https://github.com/hrsh7th/nvim-cmp"
   },
   ["nvim-lspconfig"] = {
     loaded = true,
@@ -142,6 +145,13 @@ _G.packer_plugins = {
 }
 
 time([[Defining packer_plugins]], false)
+vim.cmd [[augroup packer_load_aucmds]]
+vim.cmd [[au!]]
+  -- Event lazy-loads
+time([[Defining lazy-load event autocommands]], true)
+vim.cmd [[au VimEnter * ++once lua require("packer.load")({'coq_nvim'}, { event = "VimEnter *" }, _G.packer_plugins)]]
+time([[Defining lazy-load event autocommands]], false)
+vim.cmd("augroup END")
 
 _G._packer.inside_compile = false
 if _G._packer.needs_bufread == true then

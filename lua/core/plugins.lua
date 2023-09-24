@@ -19,18 +19,22 @@ return require('packer').startup(function(use)
   use 'nvim-tree/nvim-web-devicons'
   use 'nvim-lualine/lualine.nvim'
   use {
-    "williamboman/mason.nvim",
-    "williamboman/mason-lspconfig.nvim",
-    "neovim/nvim-lspconfig",
-  }
-  use {
       'nvim-telescope/telescope.nvim',
       tag = '0.1.0',
       requires = { {'nvim-lua/plenary.nvim'} }
   }
+  use 'neovim/nvim-lspconfig'
+  use {
+     'ms-jpq/coq_nvim',
+     branch = 'coq',
+     event = "VimEnter",
+     config = 'vim.cmd[[COQnow]]'
+  }
+  use {'ms-jpq/coq.artifacts', branch = 'artifacts'}
   -- Automatically set up your configuration after cloning packer.nvim
   -- Put this at the end after all plugins
   if packer_bootstrap then
     require('packer').sync()
   end
 end)
+
