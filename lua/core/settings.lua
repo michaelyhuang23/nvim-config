@@ -1,4 +1,4 @@
-
+vim.opt.clipboard = "unnamedplus"
 vim.opt.cursorline = false
 vim.opt.showcmd = true
 vim.opt.tabstop = 4
